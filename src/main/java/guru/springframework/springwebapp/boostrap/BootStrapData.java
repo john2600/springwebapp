@@ -47,19 +47,26 @@ public class BootStrapData implements CommandLineRunner {
         authorRepository.save(carSagan);
         bookRepository.save(bookSagan);
 
+
         System.out.println("Started BootStrap");
         System.out.println("count registers in author repo: "+authorRepository.count());
         System.out.println("count registers in book repo: "+bookRepository.count());
 
         Publisher publisher = new Publisher("Street 14/16","New York","NY","A2D101");
 
+        book1.setPublisher(publisher);
+        book2.setPublisher(publisher);
+        bookSagan.setPublisher(publisher);
+
+        publisher.getBooks().add(book1);
+        publisher.getBooks().add(book2);
+        publisher.getBooks().add(bookSagan);
+
+
         publisherRepository.save(publisher);
+
         System.out.println("publisher "+publisherRepository.count());
         List<Publisher> publisherObject = (List<Publisher>) publisherRepository.findAll();
-
-        publisherObject.forEach(x->System.out.println(x.toString()));
-
-
 
     }
 }
